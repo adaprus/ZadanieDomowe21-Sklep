@@ -33,7 +33,7 @@ public class ProductsController {
         } else {
             productList = productsRepository.getAll();
         }
-        priceSum = productService.productsPricesSum(productList, category);
+        priceSum = productService.productsPricesSum(productList);
 
         String productsInfo = "";
 

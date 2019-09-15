@@ -37,8 +37,6 @@ public class ProductsRepository {
         return products;
     }
 
-
-
     public void addProduct(Product product) {
         productList.add(product);
     }

@@ -7,17 +7,11 @@ import java.util.List;
 
 @Service
 public class ProductService {
-    public double productsPricesSum(List<Product> productList, String category) {
+    public double productsPricesSum(List<Product> productList) {
         double sum = 0;
 
         for (Product p : productList) {
-            if (category != null) {
-                if (p.getCategory().getDescription().equals(category)) {
-                    sum += p.getPrice();
-                }
-            } else {
-                sum += p.getPrice();
-            }
+            sum += p.getPrice();
         }
         return sum;
     }
