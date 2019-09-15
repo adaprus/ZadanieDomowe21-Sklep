@@ -7,33 +7,37 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import pl.javastart.products.model.Product;
 import pl.javastart.products.model.ProductCategory;
 import pl.javastart.products.repository.ProductsRepository;
+import pl.javastart.products.service.ProductService;
 
 import java.util.List;
 
 @Controller
 public class ProductsController {
     private ProductsRepository productsRepository;
+    private ProductService productService;
 
-    public ProductsController(ProductsRepository productsRepository) {
+    public ProductsController(ProductsRepository productsRepository, ProductService productService) {
         this.productsRepository = productsRepository;
+        this.productService = productService;
+
     }
 
     @GetMapping("/lista")
     @ResponseBody
     public String printProductsList(@RequestParam(value = "kategoria", required = false) String category) {
-        List<Product> products;
+        List<Product> productList;
         double priceSum;
 
         if (category != null) {
-            products = productsRepository.chosenProductsList(category);
+            productList = productsRepository.chosenProductsList(category);
         } else {
-            products = productsRepository.getAll();
+            productList = productsRepository.getAll();
         }
-        priceSum = productsRepository.productsPriceSum(category);
+        priceSum = productService.productsPricesSum(productList, category);
 
         String productsInfo = "";
 
-        for (Product p : products) {
+        for (Product p : productList) {
             productsInfo += p.toString() + "<br/>";
         }
         String priceInfo = "Suma cen wszystkich produktów: " + priceSum;
@@ -43,9 +47,9 @@ public class ProductsController {
 
     @GetMapping("/add")
     @ResponseBody
-    public String addProduct(@RequestParam(value = "nazwa") String name,
-                             @RequestParam(value = "cena") double price,
-                             @RequestParam(value = "kategoria") ProductCategory category) {
+    public String addProduct(@RequestParam String name,
+                             @RequestParam double price,
+                             @RequestParam ProductCategory category) {
 
         try {
             Product product = new Product(name, price, category);

@@ -1,7 +1,6 @@
 package pl.javastart.products.repository;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestParam;
 import pl.javastart.products.model.Product;
 import pl.javastart.products.model.ProductCategory;
 
@@ -26,7 +25,7 @@ public class ProductsRepository {
         return productList;
     }
 
-    public List<Product> chosenProductsList(@RequestParam(value = "kategoria", required = false) String category) {
+    public List<Product> chosenProductsList(String category) {
 
         List<Product> products = new ArrayList<>();
 
@@ -38,20 +37,7 @@ public class ProductsRepository {
         return products;
     }
 
-    public double productsPriceSum(@RequestParam(value = "kategoria", required = false) String category) {
-        double sum = 0;
 
-        for (Product p : productList) {
-            if (category != null) {
-                if (p.getCategory().getDescription().equals(category)) {
-                    sum += p.getPrice();
-                }
-            } else {
-                sum += p.getPrice();
-            }
-        }
-        return sum;
-    }
 
     public void addProduct(Product product) {
         productList.add(product);
