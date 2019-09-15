@@ -1,8 +1,8 @@
 package pl.javastart.products.model;
 
-public enum ProductType {
-    FOOD_ITEM ("spożywcze"),
-    HOUSEHOLD_ITEM ("gospodarstwa domowego"),
+public enum ProductCategory {
+    FOOD_ITEM ("spozywcze"),
+    HOUSEHOLD_ITEM ("domowe"),
     OTHER ("inne");
 
     private String description;
@@ -11,7 +11,7 @@ public enum ProductType {
         return description;
     }
 
-    ProductType(String description) {
+    ProductCategory(String description) {
         this.description = description;
     }
 }

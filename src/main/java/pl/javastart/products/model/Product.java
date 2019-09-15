@@ -3,16 +3,16 @@ package pl.javastart.products.model;
 public class Product {
     private String name;
     private double price;
-    private ProductType type;
+    private ProductCategory category;
 
     public Product() {
     }
 
-    public Product(String name, double price, ProductType type) {
+    public Product(String name, double price, ProductCategory type) {
         checkPreconditions(name, price);
         this.name = name;
         this.price = price;
-        this.type = type;
+        this.category = type;
     }
 
     private void checkPreconditions(String name, double price) {
@@ -40,18 +40,18 @@ public class Product {
         this.price = price;
     }
 
-    public ProductType getType() {
-        return type;
+    public ProductCategory getCategory() {
+        return category;
     }
 
-    public void setType(ProductType type) {
-        this.type = type;
+    public void setCategory(ProductCategory category) {
+        this.category = category;
     }
 
     @Override
     public String toString() {
         return "Nazwa produktu: " + name +
                 ", cena: " + price +
-                ", typ: " + type.getDescription();
+                ", typ: " + category.getDescription();
     }
 }
